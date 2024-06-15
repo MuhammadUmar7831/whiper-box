@@ -1,11 +1,11 @@
 import mongoose, { Schema, Document, mongo } from "mongoose";
 
-export interface Message extends Document{
+export interface Message extends Document {
     content: string,
     createdAt: Date,
 }
 
-const MessageSchema : Schema<Message> = new Schema({
+const MessageSchema: Schema<Message> = new Schema({
     content: {
         type: String,
         required: true
@@ -17,46 +17,29 @@ const MessageSchema : Schema<Message> = new Schema({
     }
 })
 
-export interface User extends Document{
-    username: string,
+export interface User extends Document {
+    name: string,
     email: string,
-    password: string,
-    verifyCode: string,
-    verifyCodeExpiry: Date,
-    isVerified: boolean,
+    avatar: string,
     isAccepetingMessage: boolean,
     messages: Message[]
 }
 
-const UserSchema : Schema<User> = new Schema({
-    username: {
+const UserSchema: Schema<User> = new Schema({
+    name: {
         type: String,
         required: [true, "Username is required"],
         trim: true,
-        unique: true
     },
-    email: { 
+    email: {
         type: String,
         required: [true, "Email is required"],
         trim: true,
         unique: true,
         match: [/.+\@.+\..+/, 'please use a valid email address'],
     },
-    password: {
+    avatar: {
         type: String,
-        required: [true, "Password is required"],
-    },
-    verifyCode: {
-        type: String,
-        required: [true, "Verify code is required"]
-    },
-    verifyCodeExpiry: {
-        type: Date,
-        required: [true, "Verify code expiry is required"]
-    },
-    isVerified: {
-        type: Boolean,
-        default: false,
     },
     isAccepetingMessage: {
         type: Boolean,
@@ -65,6 +48,6 @@ const UserSchema : Schema<User> = new Schema({
     messages: [MessageSchema]
 })
 
-const UserModel = (mongoose.models.User as mongoose.Model<User>) ||  (mongoose.model<User>("User", UserSchema)); 
+const UserModel = (mongoose.models.User as mongoose.Model<User>) || (mongoose.model<User>("User", UserSchema));
 
 export default UserModel;
