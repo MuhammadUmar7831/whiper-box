@@ -6,10 +6,11 @@ const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/whiper-box';
 
 export async function connectDB() : Promise<boolean>{
     try {
-        mongoose.connect(uri);
+        await mongoose.connect(uri);
+        console.log('database connected successfully.')
         return true;
     } catch (error) {
-        console.log(error);
+        console.log('failed to connect to database.');
         return false;
     }
 }

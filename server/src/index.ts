@@ -4,14 +4,13 @@ import { connectDB } from './db';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 80;
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Hello, TypeScript with Express!');
 });
 
-console.log(process.env.MONGO_URI);
-
+const port = process.env.PORT || 80;
 app.listen(port, async () => {
     const dbConnection = await connectDB();
     if (dbConnection) {
