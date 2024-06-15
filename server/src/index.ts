@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from "dotenv";
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import { connectDB } from './db';
 import authRouter from "../routes/auth.routes";
 import errorThrower from '../middlewares/error.middleware';
@@ -9,6 +10,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Hello, TypeScript with Express!');

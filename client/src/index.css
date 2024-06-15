@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.success {
+    @apply bg-green-200 border-green-600 text-green-600
+}
+
+.error {
+    @apply bg-red-200 border-red-600 text-red-600
+}

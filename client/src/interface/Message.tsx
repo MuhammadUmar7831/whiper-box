@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { setError } from "../store/slices/error.slice";
 import { RootState, useAppDispatch, useAppSelector } from "../store/store";
+import { setSuccess } from "../store/slices/success.slice";
 
 export default function Message() {
     const { success } = useAppSelector((state: RootState) => state.success);
@@ -22,7 +23,7 @@ export default function Message() {
     useEffect(() => {
         if (success) {
             const timeoutId = setTimeout(() => {
-                dispatch(setError(false));
+                dispatch(setSuccess(false));
             }, 5000);
 
             return () => clearTimeout(timeoutId);

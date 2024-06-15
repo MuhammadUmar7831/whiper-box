@@ -6,7 +6,7 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: 'AIzaSyBYpmfebhGcVuF6JwAvDIaAtL7FP7fWxZQ', //process.env.FIREBASE_AUTH_API_KEY,
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: "whisper-box-dadfd.firebaseapp.com",
     projectId: "whisper-box-dadfd",
     storageBucket: "whisper-box-dadfd.appspot.com",
