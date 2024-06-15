@@ -1,6 +1,9 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loading from './interface/Loading';
-import Message from './interface/Message';
+import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
+import Message from "./interface/Message";
+import Whisper from "./pages/Whisper";
 
 function App() {
 
@@ -8,7 +11,13 @@ function App() {
     <>
       <Loading />
       <Message />
-      <Home />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/whisper/:username" element={<Whisper />} />
+          <Route path="/u/:username" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

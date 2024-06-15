@@ -4,11 +4,11 @@ import { setError } from "../store/slices/error.slice";
 import { setLoading } from "../store/slices/loading.slice";
 import { setSuccess } from "../store/slices/success.slice";
 import { useAppDispatch } from "../store/store";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function useLogin() {
     const dispatch = useAppDispatch();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     async function handleContinueWithGoogleClick() {
         dispatch(setLoading(true));
@@ -24,7 +24,7 @@ export default function useLogin() {
             const resAuthApi = await authApi(reqBody);
             if (resAuthApi.success) {
                 dispatch(setSuccess(resAuthApi.message));
-                // navigate('/user');
+                navigate(`/u/${resAuthApi.username}`);
             } else {
                 dispatch(setError(resAuthApi.message));
             }
