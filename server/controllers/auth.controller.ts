@@ -1,9 +1,9 @@
-// src/controllers/authController.ts
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import UserModel from '../models/User.model';
 import errorHandler from '../errors/errorHandler';
 import dotenv from 'dotenv';
+import { authenticateReq } from '../middlewares/authenticate.middleware';
 dotenv.config();
 
 interface loginRequest extends Request {
@@ -52,3 +52,15 @@ export const login = async (req: loginRequest, res: Response, next: NextFunction
         next(error);
     }
 };
+
+
+export const getUser = async (req: authenticateReq, res: Response, next: NextFunction) => {
+    try {
+        const user = req.user;
+        res
+            .status(200)
+            .send({ success: true, message: `Hi! ${user?.name}`, user });
+    } catch (error) {
+        next(error);
+    }
+}
