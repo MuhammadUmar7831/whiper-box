@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { setLoading } from "./store/slices/loading.slice";
 import { setUser } from "./store/slices/user.slice";
 import { getUserApi } from "./api/authApi";
+import { setSuccess } from "./store/slices/success.slice";
+import { setError } from "./store/slices/error.slice";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -21,21 +23,26 @@ function App() {
       try {
         const res = await getUserApi();
         if (res.success) {
+          dispatch(setSuccess(res.message));
           dispatch(setUser(res.user));
+        } else {
+          dispatch(setError(res.message));
         }
       } finally {
         dispatch(setLoading(false));
         setUserFetched(true);
       }
     };
-
     getUser();
-  }, [dispatch]);
+  }, []);
 
   if (!userFetched) {
-    return <Loading />;
+    return (
+      <div className="flex items-center justify-center h-full w-full">
+        <h1 className="text-center text-xl">Authenticating</h1>
+      </div>
+    );
   }
-
 
   return (
     <>
@@ -46,7 +53,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/whisper/:username" element={<Whisper />} />
           <Route element={<PrivateRoute />}>
-            <Route path="/u/:username" element={<Dashboard />} />
+            <Route path="/u" element={<Dashboard />} />
           </Route>
 
         </Routes>

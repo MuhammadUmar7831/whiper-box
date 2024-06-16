@@ -26,7 +26,7 @@ export default function useLogin() {
             if (resAuthApi.success) {
                 dispatch(setSuccess(resAuthApi.message));
                 dispatch(setUser(resAuthApi.user));
-                navigate(`/u/${resAuthApi.username}`);
+                navigate(`/u`);
             } else {
                 dispatch(setError(resAuthApi.message));
             }
