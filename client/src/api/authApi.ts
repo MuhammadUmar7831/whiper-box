@@ -10,3 +10,12 @@ export const authApi = async (formData: { name: string, email: string, avatar: s
         return { success: false, message: error.response.data };
     }
 };
+
+export const getUserApi = async (): Promise<ApiResponse> => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/api/auth/getUser`);
+        return response.data;
+    } catch (error: any) {
+        return { success: false, message: error.response.data };
+    }
+}

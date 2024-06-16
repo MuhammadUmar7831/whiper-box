@@ -3,6 +3,7 @@ import { googleOAuthApi } from "../api/googleOAuthApi";
 import { setError } from "../store/slices/error.slice";
 import { setLoading } from "../store/slices/loading.slice";
 import { setSuccess } from "../store/slices/success.slice";
+import { setUser } from "../store/slices/user.slice";
 import { useAppDispatch } from "../store/store";
 import { useNavigate } from "react-router-dom";
 
@@ -24,6 +25,7 @@ export default function useLogin() {
             const resAuthApi = await authApi(reqBody);
             if (resAuthApi.success) {
                 dispatch(setSuccess(resAuthApi.message));
+                dispatch(setUser(resAuthApi.user));
                 navigate(`/u/${resAuthApi.username}`);
             } else {
                 dispatch(setError(resAuthApi.message));

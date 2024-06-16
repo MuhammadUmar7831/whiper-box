@@ -33,12 +33,12 @@ export const login = async (req: loginRequest, res: Response, next: NextFunction
             }
         }
 
-        const user = await UserModel.findOne({ email });
+        let user = await UserModel.findOne({ email });
         if (user) {
             successMessage = 'login successfull';
         } else {
-            const newUser = new UserModel({ name, email, avatar });
-            await newUser.save();
+            user = new UserModel({ name, email, avatar });
+            await user.save();
             successMessage = 'registration successfully';
         }
         const newToken = jwt.sign({ email }, process.env.JWT_SECRET as string);
@@ -47,7 +47,7 @@ export const login = async (req: loginRequest, res: Response, next: NextFunction
         res
             .cookie('access_token', newToken, { httpOnly: true })
             .status(201)
-            .send({ success: true, message: successMessage, username });
+            .send({ success: true, message: successMessage, username, user });
     } catch (error) {
         next(error);
     }
