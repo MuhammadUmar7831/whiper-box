@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BASE_URL } from "../config/api.config";
 import { RootState, useAppSelector } from "../store/store"
 import { IoCopyOutline } from "react-icons/io5";
+import { motion } from "framer-motion";
 
 const Dashboard = () => {
     const { user } = useAppSelector((state: RootState) => state.user);
@@ -19,20 +20,17 @@ const Dashboard = () => {
     return (
         <main>
             <div className="bg-black text-white w-full h-20 flex items-center px-2 justify-between tracking-wider">
-                <div className="text-white flex items-center gap-2">
-                    <div className="w-14 h-14">
-                        <img className="object-cover w-full h-full" src="/logo.png" alt="logo" />
-                    </div>
+                <div className="text-white flex items-center gap-2 px-6">
                     <p className="text-lg font-semibold">Whisper Box</p>
                 </div>
-                <div className="text-white flex items-center gap-2">
-                    <p className="text-lg font-semibold">{user?.name}</p>
-                    <div className="w-12 h-12 rounded-full overflow-hidden">
-                        <img className="object-cover w-full h-full" src={user?.avatar} alt="avatar" />
-                    </div>
+            </div>
+            <div className="w-full pt-10 flex flex-col md:flex-row justify-center items-center gap-4">
+                <h1 className="text-2xl text-center font-semibold">Wellcome {user?.name}</h1>
+                <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+                    <img className="object-cover w-full h-full" src={user?.avatar} alt="avatar" />
                 </div>
             </div>
-            <div className="w-full p-10 flex flex-col gap-4 ">
+            <div className="w-full p-10 flex flex-col gap-4">
                 <h1 className="text-xl font-semibold">Get you whisper at this URL :</h1>
                 <div className="border rounded-md p-4 flex justify-between items-center">
                     {`${BASE_URL}/whisper/${user?._id}`}
@@ -55,6 +53,17 @@ const Dashboard = () => {
 
                         )}
                     </button>
+                </div>
+            </div>
+            <div className="w-full p-10 flex flex-col gap-4">
+                <h1 className="text-2xl font-semibold">Whispers:</h1>
+                <div className="relative">
+                    <span className="absolute top-1 left-1 h-full w-full rounded bg-black" />
+                    <motion.span
+                        initial={{ top: '0.25rem', left: '0.25rem' }}
+                        whileHover={{ top: '0rem', left: '0rem' }}
+                        transition={{ duration: 0.1 }}
+                        className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:text-gray-900">send</motion.span>
                 </div>
             </div>
         </main>
