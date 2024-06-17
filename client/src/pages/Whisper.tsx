@@ -1,12 +1,43 @@
 import { motion } from "framer-motion";
 import useWhisper from "../hooks/useWhisper";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import Error from "./Error";
+import { RootState, useAppSelector } from "../store/store";
 
 const Whisper = () => {
+    const { userId } = useParams();
+    const { loading } = useAppSelector((state: RootState) => state.loading);
     const {
         message,
-        setMessage
+        setMessage,
+        getUser,
+        success,
+        setSuccess,
+        user
     } = useWhisper();
-    
+
+    useEffect(() => {
+        console.log(userId);
+        if (userId) {
+            getUser(userId);
+        } else {
+            setSuccess(false);
+        }
+    }, []);
+
+    if (loading) {
+        return (
+            <></>
+        )
+    }
+
+    if (!loading && !success) {
+        return (
+            <Error />
+        )
+    }
+
     return (
         <main>
             <div className="bg-black text-white w-full h-20 flex items-center px-6 justify-between tracking-wider">
@@ -14,6 +45,13 @@ const Whisper = () => {
                     <p className="text-lg font-semibold">Whisper Box</p>
                 </div>
             </div>
+            <div className="w-full pt-10 flex justify-center items-center gap-4">
+                <h1 className="text-2xl text-center font-semibold">Send a whisper about {user.name}</h1>
+                <div className="w-12 h-12 rounded-full overflow-hidden bg-red-500 flex-shrink-0">
+                    <img className="object-cover w-full h-full" src={user.avatar} alt="avatar" />
+                </div>
+            </div>
+
             <div className="w-full p-10 flex flex-col gap-4 ">
                 <h1 className="text-xl font-semibold">Type the whisper here :</h1>
                 <textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder="max 200 charecters" className="border rounded-md p-4 flex justify-between items-center">

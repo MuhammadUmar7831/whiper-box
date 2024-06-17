@@ -23,7 +23,6 @@ function App() {
       try {
         const res = await getUserApi();
         if (res.success) {
-          dispatch(setSuccess(res.message));
           dispatch(setUser(res.user));
         } else {
           dispatch(setError(res.message));
@@ -51,7 +50,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/whisper/:username" element={<Whisper />} />
+          <Route path="/whisper/:userId" element={<Whisper />} />
           <Route element={<PrivateRoute />}>
             <Route path="/u" element={<Dashboard />} />
           </Route>
