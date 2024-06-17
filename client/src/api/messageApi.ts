@@ -9,3 +9,12 @@ export const getUserApi = async (userId: string) => {
         return error.response.data;
     }
 }
+
+export const sendMessageApi = async (userId: string, content: string) => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/api/message/send/${userId}`, { content });
+        return response.data;
+    } catch (error: any) {
+        return error.response.data;
+    }
+}

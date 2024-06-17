@@ -12,9 +12,10 @@ const Whisper = () => {
         message,
         setMessage,
         getUser,
-        success,
-        setSuccess,
-        user
+        _success,
+        _setSuccess,
+        user,
+        sendMessage
     } = useWhisper();
 
     useEffect(() => {
@@ -22,17 +23,11 @@ const Whisper = () => {
         if (userId) {
             getUser(userId);
         } else {
-            setSuccess(false);
+            _setSuccess(false);
         }
     }, []);
 
-    if (loading) {
-        return (
-            <></>
-        )
-    }
-
-    if (!loading && !success) {
+    if (!loading && !_success) {
         return (
             <Error />
         )
@@ -47,18 +42,18 @@ const Whisper = () => {
             </div>
             <div className="w-full pt-10 flex justify-center items-center gap-4">
                 <h1 className="text-2xl text-center font-semibold">Send a whisper about {user.name}</h1>
-                <div className="w-12 h-12 rounded-full overflow-hidden bg-red-500 flex-shrink-0">
+                <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
                     <img className="object-cover w-full h-full" src={user.avatar} alt="avatar" />
                 </div>
             </div>
 
-            <div className="w-full p-10 flex flex-col gap-4 ">
+            <form onSubmit={(e) => { e.preventDefault(); sendMessage(userId); }} className="w-full p-10 flex flex-col gap-4 ">
                 <h1 className="text-xl font-semibold">Type the whisper here :</h1>
-                <textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder="max 200 charecters" className="border rounded-md p-4 flex justify-between items-center">
+                <textarea required value={message} onChange={(e) => setMessage(e.target.value)} placeholder="whiper..." className="border rounded-md p-4 flex justify-between items-center">
 
                 </textarea>
                 <div className="flex justify-end">
-                    <button className="relative">
+                    <button type="submit" className="relative">
                         <span className="absolute top-1 left-1 h-full w-full rounded bg-black" />
                         <motion.span
                             initial={{ top: '0rem', left: '0rem' }}
@@ -67,7 +62,7 @@ const Whisper = () => {
                             className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900">send</motion.span>
                     </button>
                 </div>
-            </div>
+            </form>
         </main>
     )
 }

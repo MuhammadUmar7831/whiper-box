@@ -59,7 +59,7 @@ export const sendMessage = async (req: Request, res: Response, next: NextFunctio
             emailMessage = `, Error sending email notification to ${user.name}`;
         }
 
-        res.status(200).send({ succes: true, message: `message sent successfully${emailMessage}` });
+        res.status(200).send({ success: true, message: `message sent successfully${emailMessage}` });
     } catch (error) {
         next(error);
     }
