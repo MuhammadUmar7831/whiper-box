@@ -4,6 +4,7 @@ import { useAppDispatch } from "../store/store";
 import { setLoading } from "../store/slices/loading.slice";
 import { setError } from "../store/slices/error.slice";
 import { setSuccess } from "../store/slices/success.slice";
+import { model } from "../lib/gemini";
 
 
 const useWhisper = () => {
@@ -27,7 +28,7 @@ const useWhisper = () => {
     }
 
     const sendMessage = async (userId: string | undefined) => {
-        if (message.length == 0){
+        if (message.length == 0) {
             dispatch(setError('please write in text field'));
         }
         dispatch(setLoading(true));
@@ -42,6 +43,15 @@ const useWhisper = () => {
         dispatch(setLoading(false));
     }
 
+    const getAiSuggestion = async () => {
+        console.log('loading..');
+        const prompt = "Write a story about a magic backpack."
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const text = response.text();
+        console.log(text);
+    }
+
     return {
         message,
         setMessage,
@@ -49,7 +59,8 @@ const useWhisper = () => {
         _success,
         _setSuccess,
         user,
-        sendMessage
+        sendMessage,
+        getAiSuggestion
     }
 }
 

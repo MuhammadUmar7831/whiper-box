@@ -1,5 +1,5 @@
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { app } from "../firebase/firebaseSDK";
+import { app } from "../lib/firebaseSDK";
 
 export const googleOAuthApi = async () => {
     try {
