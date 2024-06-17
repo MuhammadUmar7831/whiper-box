@@ -18,3 +18,12 @@ export const sendMessageApi = async (userId: string, content: string) => {
         return error.response.data;
     }
 }
+
+export const getUserMessagesApi = async (userId: String) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/api/message/getMessages/${userId}`);
+        return response.data;
+    } catch (error: any) {
+        return error.response.data;
+    }
+}
