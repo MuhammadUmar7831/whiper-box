@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { connectDB } from './db';
 import authRouter from "../routes/auth.routes";
+import messageRouter from "../routes/message.routes";
 import errorThrower from '../middlewares/error.middleware';
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRouter);
+app.use('/api/message', messageRouter);
 
 const port = process.env.PORT || 80;
 app.listen(port, async () => {

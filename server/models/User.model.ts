@@ -1,16 +1,5 @@
-import mongoose, { Schema, Document, mongo } from "mongoose";
-
-export interface Message extends Document {
-    content: string,
-    createdAt: Date,
-}
-
-const MessageSchema: Schema<Message> = new Schema({
-    content: {
-        type: String,
-        required: true
-    }
-})
+import mongoose, { Schema, Document } from "mongoose";
+import { Message } from "./Message.model";
 
 export interface User extends Document {
     name: string,

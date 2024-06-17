@@ -16,7 +16,6 @@ export const authenticate = async (req: authenticateReq, res: Response, next: Ne
             try {
                 const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
                 const user = await UserModel.findOne({ email: decoded.email });
-                console.log(user);
                 if (!user) {
                     return next(errorHandler(404, 'User not found. Please login to continue'));
                 }
