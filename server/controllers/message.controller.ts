@@ -78,7 +78,7 @@ export const getMessageByUser = async (req: Request, res: Response, next: NextFu
             return next(errorHandler(404, 'User not found'))
         }
 
-        const messages = await MessageModel.find({ user: userId });
+        const messages = await MessageModel.find({ user: userId }).sort({ createdAt: -1 });
         let whispers: [] | Message[] = [];
         if (messages) {
             whispers = messages;
