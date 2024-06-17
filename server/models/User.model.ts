@@ -6,7 +6,6 @@ export interface User extends Document {
     email: string,
     avatar: string,
     isAccepetingMessage: boolean,
-    messages: Message[]
 }
 
 const UserSchema: Schema<User> = new Schema({
@@ -27,6 +26,7 @@ const UserSchema: Schema<User> = new Schema({
     },
     isAccepetingMessage: {
         type: Boolean,
+        default: true
     }
 })
 
