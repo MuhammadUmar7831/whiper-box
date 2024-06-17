@@ -4,11 +4,13 @@ import { RootState, useAppSelector } from "../store/store"
 import { IoCopyOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 import useDashboard from "../hooks/useDashboard";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const Dashboard = () => {
     const { user } = useAppSelector((state: RootState) => state.user);
-    const [copied, setCopied] = useState(false);
     const {
+        copied,
+        setCopied,
         whispers,
         setWhispers,
         getUserMessages
@@ -27,7 +29,14 @@ const Dashboard = () => {
             .catch(err => console.error('Failed to copy:', err));
     };
 
-
+    function formatDate(inputDate: Date) {
+        const date = new Date(inputDate);
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        });
+    }
 
     return (
         <main>
@@ -79,7 +88,10 @@ const Dashboard = () => {
                                 transition={{ duration: 0.1 }}
                                 className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:text-gray-900">
                                 <p>{whisper.content}</p>
-                                {/* <span className="text-sm text-gray-400">{whisper.createdAt.toLocaleDateString('en-US')}</span> */}
+                                <div className="flex justify-between mt-4 p-1">
+                                    <span className="text-sm text-gray-400">{formatDate(whisper.createdAt)}</span>
+                                    <AiOutlineDelete className="w-5 h-5 cursor-pointer" color="red" />
+                                </div>
                             </motion.span>
                         </div>
                     ))}

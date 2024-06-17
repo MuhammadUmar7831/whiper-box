@@ -9,6 +9,7 @@ export default function useDashboard() {
     const dispatch = useAppDispatch();
     const { user } = useAppSelector((state: RootState) => state.user);
     const [whispers, setWhispers] = useState<Message[] | []>([]);
+    const [copied, setCopied] = useState(false);
 
     const getUserMessages = async () => {
         dispatch(setLoading(true));
@@ -23,6 +24,8 @@ export default function useDashboard() {
         dispatch(setLoading(false));
     }
     return {
+        copied,
+        setCopied,
         whispers,
         setWhispers,
         getUserMessages
