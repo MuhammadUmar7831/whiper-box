@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BASE_URL } from "../config/api.config";
 import { RootState, useAppSelector } from "../store/store"
 import { IoCopyOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
+import useDashboard from "../hooks/useDashboard";
 
 const Dashboard = () => {
     const { user } = useAppSelector((state: RootState) => state.user);
     const [copied, setCopied] = useState(false);
+    const {
+        whispers,
+        setWhispers,
+        getUserMessages
+    } = useDashboard();
+
+    useEffect(() => {
+        getUserMessages();
+    }, [])
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(`${BASE_URL}/whisper/${user?._id}`)
@@ -16,6 +26,8 @@ const Dashboard = () => {
             })
             .catch(err => console.error('Failed to copy:', err));
     };
+
+
 
     return (
         <main>
@@ -57,13 +69,20 @@ const Dashboard = () => {
             </div>
             <div className="w-full p-10 flex flex-col gap-4">
                 <h1 className="text-2xl font-semibold">Whispers:</h1>
-                <div className="relative">
-                    <span className="absolute top-1 left-1 h-full w-full rounded bg-black" />
-                    <motion.span
-                        initial={{ top: '0.25rem', left: '0.25rem' }}
-                        whileHover={{ top: '0rem', left: '0rem' }}
-                        transition={{ duration: 0.1 }}
-                        className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:text-gray-900">send</motion.span>
+                <div className="flex flex-wrap justify-between gap-4">
+                    {whispers.map((whisper, index) => (
+                        <div key={index} className="relative w-[49%] min-w-32">
+                            <span className="absolute top-1 left-1 h-full w-full rounded bg-black" />
+                            <motion.span
+                                initial={{ top: '0.25rem', left: '0.25rem' }}
+                                whileHover={{ top: '0rem', left: '0rem' }}
+                                transition={{ duration: 0.1 }}
+                                className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:text-gray-900">
+                                <p>{whisper.content}</p>
+                                {/* <span className="text-sm text-gray-400">{whisper.createdAt.toLocaleDateString('en-US')}</span> */}
+                            </motion.span>
+                        </div>
+                    ))}
                 </div>
             </div>
         </main>
