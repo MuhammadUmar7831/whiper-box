@@ -6,7 +6,7 @@ export default function Loading() {
 
     return (
         loading && (
-            <div className="fixed top-0 left-0 flex justify-center items-center w-screen h-screen bg-gray-300 bg-opacity-50">
+            <div className="fixed top-0 left-0 flex justify-center items-center w-screen h-screen bg-gray-300 bg-opacity-50 z-10">
                 <BarLoader color="#343434" width={200} />
             </div>
         )

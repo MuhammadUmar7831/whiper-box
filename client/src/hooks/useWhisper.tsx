@@ -4,13 +4,15 @@ import { useAppDispatch } from "../store/store";
 import { setLoading } from "../store/slices/loading.slice";
 import { setError } from "../store/slices/error.slice";
 import { setSuccess } from "../store/slices/success.slice";
-import { model } from "../lib/gemini";
+import { model } from "../lib/geminiSDK";
 
 
 const useWhisper = () => {
     const [message, setMessage] = useState('');
     const [_success, _setSuccess] = useState(true);
     const [user, setUser] = useState({});
+    const [prompt, setPrompt] = useState('Generate a question to inqure someone');
+    const [geminiResponse, setGeminiResponse] = useState(['Have you ever cheated in exams?', "You are the best person i've ever met", "You are so rude."]);
     const dispatch = useAppDispatch();
 
     const getUser = async (userId: string) => {
@@ -44,13 +46,28 @@ const useWhisper = () => {
     }
 
     const getAiSuggestion = async () => {
-        console.log('loading..');
-        const prompt = "Write a story about a magic backpack."
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text();
-        console.log(text);
-    }
+        dispatch(setLoading(true));
+
+        try {
+            const responses = [];
+            const callGemini = async () => {
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                return response.text();
+            };
+            for (let i = 0; i < 3; i++) {
+                const text = await callGemini();
+                responses.push(text);
+                console.log(text);
+            }
+            setGeminiResponse(responses);
+        } catch (error) {
+            console.error('Error fetching AI suggestions:', error);
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
+
 
     return {
         message,
@@ -60,7 +77,10 @@ const useWhisper = () => {
         _setSuccess,
         user,
         sendMessage,
-        getAiSuggestion
+        getAiSuggestion,
+        prompt,
+        setPrompt,
+        geminiResponse
     }
 }
 
