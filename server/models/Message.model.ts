@@ -17,7 +17,7 @@ const MessageSchema: Schema<Message> = new Schema({
         ref: 'User',
         required: true
     }
-})
+}, { timestamps: true })
 
 const MessageModel = (mongoose.models.Message as mongoose.Model<Message>) || (mongoose.model<Message>("Message", MessageSchema));
 
