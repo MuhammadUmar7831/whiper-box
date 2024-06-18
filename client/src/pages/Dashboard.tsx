@@ -63,7 +63,7 @@ const Dashboard = () => {
             <div className="w-full p-10 flex flex-col gap-4">
                 <h1 className="text-xl font-semibold">Get you whisper at this URL :</h1>
                 <div className="border rounded-md p-4 flex justify-between items-center">
-                    {`${BASE_URL}/whisper/${user?._id}`}
+                    <p className="truncate max-w-full">{`${BASE_URL}/whisper/${user?._id}`}</p>
                     <button
                         className="flex gap-2 items-center rounded p-2"
                         onClick={copyToClipboard}
@@ -89,7 +89,7 @@ const Dashboard = () => {
                 <h1 className="text-2xl font-semibold">Whispers:</h1>
                 {whispers.length === 0 ? <p>No Whispers yet</p> : <div className="flex flex-wrap justify-between gap-4">
                     {whispers.map((whisper, index) => (
-                        <div key={index} className="relative w-[49%] min-w-32">
+                        <div key={index} className="relative w-full lg:w-[49%] min-w-32">
                             <span className="absolute top-1 left-1 h-full w-full rounded bg-black" />
                             <motion.span
                                 initial={{ top: '0.25rem', left: '0.25rem' }}
