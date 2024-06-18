@@ -27,7 +27,7 @@ app.get('/client', async (req, res) => {
 });
 
 app.get('/db', (req, res) => {
-    res.send(process.env.MONGO_URI);
+    res.send(process.env.MONGODB_URI);
 });
 
 app.use('/api/auth', authRouter);
