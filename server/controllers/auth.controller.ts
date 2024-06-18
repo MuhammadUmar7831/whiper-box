@@ -43,7 +43,7 @@ export const login = async (req: loginRequest, res: Response, next: NextFunction
             successMessage = 'registration successfully';
         }
         const newToken = jwt.sign({ email }, process.env.JWT_SECRET as string);
-        const username = email.split('@')[0];
+        // const username = email.split('@')[0];
 
         res
             .cookie('access_token', newToken, { httpOnly: true })
