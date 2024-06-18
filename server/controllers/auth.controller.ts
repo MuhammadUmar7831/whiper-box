@@ -34,8 +34,8 @@ export const login = async (req: loginRequest, res: Response, next: NextFunction
             }
         }
         const dbConnection = await connectDB();
-        await UserModel.findOne({ email }).exec();
-        res.status(200).send({ success: true, token, successMessage });
+        const u = await UserModel.findOne({ email }).exec();
+        res.status(200).send({ success: true, token, successMessage, u });
         let user = await UserModel.findOne({ email });
         if (user) {
             successMessage = 'login successfull';
