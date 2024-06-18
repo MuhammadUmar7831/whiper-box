@@ -30,7 +30,7 @@ export const getUserMessagesApi = async (userId: String) => {
 
 export const deleteUserMessagesApi = async (messageId: String) => {
     try {
-        const response = await axios.delete(`${API_BASE_URL}/api/message/deleteMessage/${messageId}`);
+        const response = await axios.delete(`${API_BASE_URL}/api/message/deleteMessage/${messageId}`, { withCredentials: true });
         return response.data;
     } catch (error: any) {
         return error.response.data;
