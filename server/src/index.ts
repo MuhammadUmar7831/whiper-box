@@ -34,13 +34,12 @@ app.use('/api/auth', authRouter);
 app.use('/api/message', messageRouter);
 
 const port = process.env.PORT || 80;
+connectDB();
 app.listen(port, async () => {
-    const dbConnection = await connectDB();
-    if (dbConnection) {
-        console.log(`Server is running on port ${port}`);
-    } else {
-        process.exit(1);
-    }
+    console.log(`Server is running on port ${port}`);
+    // } else {
+    //     process.exit(1);
+    // }
 });
 
 app.use(errorThrower);
