@@ -31,8 +31,8 @@ export const login = async (req: loginRequest, res: Response, next: NextFunction
             } catch (error) {
                 return next(errorHandler(400, 'Invalid token, clear your cookies'));
             }
-        }
-        res.status(200).send({ success: true, token: 'token', successMessage });
+        } await UserModel.findOne()
+        res.status(200).send({ success: true, token, successMessage });
         let user = await UserModel.findOne({ email });
         if (user) {
             successMessage = 'login successfull';
