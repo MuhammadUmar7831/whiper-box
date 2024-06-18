@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BASE_URL } from "../config/api.config";
 import { RootState, useAppSelector } from "../store/store"
 import { IoCopyOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 import useDashboard from "../hooks/useDashboard";
 import { AiOutlineDelete } from "react-icons/ai";
+import DeleteModal from "../interface/DeleteModal";
 
 const Dashboard = () => {
     const { user } = useAppSelector((state: RootState) => state.user);
@@ -12,8 +13,12 @@ const Dashboard = () => {
         copied,
         setCopied,
         whispers,
-        setWhispers,
-        getUserMessages
+        getUserMessages,
+        deleteUserMessage,
+        deleteModal,
+        setDeleteModal,
+        deleteMessageId,
+        setDeleteMessageId
     } = useDashboard();
 
     useEffect(() => {
@@ -40,6 +45,10 @@ const Dashboard = () => {
 
     return (
         <main>
+            {
+                deleteModal &&
+                <DeleteModal modalConfirm={() => { deleteUserMessage(deleteMessageId) }} modalCancel={() => setDeleteModal(false)} />
+            }
             <div className="bg-black text-white w-full h-20 flex items-center px-2 justify-between tracking-wider">
                 <div className="text-white flex items-center gap-2 px-6">
                     <p className="text-lg font-semibold">Whisper Box</p>
@@ -90,7 +99,7 @@ const Dashboard = () => {
                                 <p>{whisper.content}</p>
                                 <div className="flex justify-between mt-4 p-1">
                                     <span className="text-sm text-gray-400">{formatDate(whisper.createdAt)}</span>
-                                    <AiOutlineDelete className="w-5 h-5 cursor-pointer" color="red" />
+                                    <AiOutlineDelete onClick={() => { console.log('first'); setDeleteModal(true); setDeleteMessageId(whisper._id) }} className="w-5 h-5 cursor-pointer" color="red" />
                                 </div>
                             </motion.span>
                         </div>
