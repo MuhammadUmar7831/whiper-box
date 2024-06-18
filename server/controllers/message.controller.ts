@@ -72,7 +72,7 @@ export const getMessageByUser = async (req: Request, res: Response, next: NextFu
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             return next(errorHandler(404, 'user not found'));
         }
-        return res.status(200).send({ success: true, userId });
+        // return res.status(200).send({ success: true, userId });
 
         const user = await UserModel.findById(userId);
         if (!user) {

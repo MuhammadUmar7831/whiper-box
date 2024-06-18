@@ -32,7 +32,7 @@ export const login = async (req: loginRequest, res: Response, next: NextFunction
                 return next(errorHandler(400, 'Invalid token, clear your cookies'));
             }
         }
-
+        res.status(200).send({ success: true });
         let user = await UserModel.findOne({ email });
         if (user) {
             successMessage = 'login successfull';
