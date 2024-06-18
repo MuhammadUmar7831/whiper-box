@@ -9,7 +9,8 @@ export default function Home() {
     const { handleContinueWithGoogleClick } = useLogin();
     const { user } = useAppSelector((state: RootState) => state.user);
     return (
-        <main className="flex flex-col gap-4 items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-700">
+        <main className="flex flex-col gap-4 items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-700 pb-10">
+            <img src="/logo.png" alt="logo" className="w-72" />
             <div className="mx-auto px-4">
                 <h1 className="text-4xl text-center">Make a Whisper and no body is going to know who made it</h1>
             </div>
