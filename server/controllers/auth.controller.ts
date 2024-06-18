@@ -32,7 +32,7 @@ export const login = async (req: loginRequest, res: Response, next: NextFunction
                 return next(errorHandler(400, 'Invalid token, clear your cookies'));
             }
         }
-        await UserModel.findOne({ emial }).exec();
+        await UserModel.findOne({ email }).exec();
         res.status(200).send({ success: true, token, successMessage });
         let user = await UserModel.findOne({ email });
         if (user) {
