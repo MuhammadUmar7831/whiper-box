@@ -5,12 +5,13 @@ import { setLoading } from "../store/slices/loading.slice";
 import { setError } from "../store/slices/error.slice";
 import { setSuccess } from "../store/slices/success.slice";
 import { model } from "../lib/geminiSDK";
+import { User } from "../types/user.type";
 
 
 const useWhisper = () => {
     const [message, setMessage] = useState('');
     const [_success, _setSuccess] = useState(true);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState<User | null>(null);
     const [prompt, setPrompt] = useState('Generate a question to inqure someone');
     const [geminiResponse, setGeminiResponse] = useState(['Have you ever cheated in exams?', "You are the best person i've ever met", "You are so rude."]);
     const dispatch = useAppDispatch();

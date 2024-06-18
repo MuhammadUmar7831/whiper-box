@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import Error from "./Error";
 import { RootState, useAppSelector } from "../store/store";
 import { SiGooglegemini } from "react-icons/si";
-import { BsQuestion } from "react-icons/bs";
 
 const Whisper = () => {
     const { userId } = useParams();
@@ -19,8 +18,8 @@ const Whisper = () => {
         user,
         sendMessage,
         getAiSuggestion,
-        prompt,
-        setPrompt,
+        // prompt,
+        // setPrompt,
         geminiResponse
     } = useWhisper();
 
@@ -47,9 +46,9 @@ const Whisper = () => {
                 </div>
             </div>
             <div className="w-full pt-10 flex flex-col md:flex-row justify-center items-center gap-4">
-                <h1 className="text-2xl text-center font-semibold">Send a whisper about {user.name}</h1>
+                <h1 className="text-2xl text-center font-semibold">Send a whisper about {user?.name}</h1>
                 <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
-                    <img className="object-cover w-full h-full" src={user.avatar} alt="avatar" />
+                    <img className="object-cover w-full h-full" src={user?.avatar} alt="avatar" />
                 </div>
             </div>
 
