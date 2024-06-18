@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .success {
-    @apply bg-green-200 border-green-600 text-green-600
+    @apply bg-green-100 border-green-600 text-green-600
 }
 
 .error {
-    @apply bg-red-200 border-red-600 text-red-600
+    @apply bg-red-100 border-red-600 text-red-600
 }
 
 * {

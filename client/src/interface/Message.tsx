@@ -34,7 +34,7 @@ export default function Message() {
         (success || error) && (
             <motion.div
                 className={`${success ? "success" : "error"
-                    } fixed top-2 left-2 border-l-4 p-4 rounded-md`}
+                    } fixed bottom-2 left-2 border-l-4 p-4 rounded-md`}
                 role="alert"
                 initial={{ x: -100 }}
                 animate={{ x: 0 }}
