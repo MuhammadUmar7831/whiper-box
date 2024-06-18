@@ -32,9 +32,8 @@ export const login = async (req: loginRequest, res: Response, next: NextFunction
                 return next(errorHandler(400, 'Invalid token, clear your cookies'));
             }
         }
-        let user = await UserModel.findOne({ email }).wtimeout(5000);
+        let user = await UserModel.findOne({ email });
         res.status(200).send({ success: true, user });
-
         if (user) {
             successMessage = 'login successfull';
         } else {
