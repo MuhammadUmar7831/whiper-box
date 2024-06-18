@@ -37,9 +37,6 @@ const port = process.env.PORT || 80;
 connectDB();
 app.listen(port, async () => {
     console.log(`Server is running on port ${port}`);
-    // } else {
-    //     process.exit(1);
-    // }
 });
 
 app.use(errorThrower);
