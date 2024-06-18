@@ -88,3 +88,21 @@ export const getMessageByUser = async (req: Request, res: Response, next: NextFu
         return next(error);
     }
 }
+
+
+export const deleteUserMessage = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { messageId } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(messageId)) {
+            return next(errorHandler(400, 'Invalid whisper'));
+        }
+    
+        const delMessage = await MessageModel.findByIdAndDelete(messageId);
+        if (!delMessage) {
+            return next(errorHandler(400, 'Whisper not found'));
+        }
+        res.status(200).send({ success: true, message: 'Whisper deleted' });
+    } catch (error) {
+        next(error);
+    }
+}
