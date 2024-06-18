@@ -7,6 +7,7 @@ export const authApi = async (formData: { name: string, email: string, avatar: s
         const response = await axios.post(`${API_BASE_URL}/api/auth`, formData, { withCredentials: true });
         return response.data;
     } catch (error: any) {
+        console.log(error);
         return { success: false, message: error.response.data };
     }
 };
