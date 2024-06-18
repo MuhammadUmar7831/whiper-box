@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
     res.send('Hello, TypeScript with Express!');
 });
 
+app.get('/client', (req, res) => {
+    res.send(process.env.CLIENT_BASE_URL);
+});
+
 app.use('/api/auth', authRouter);
 app.use('/api/message', messageRouter);
 
