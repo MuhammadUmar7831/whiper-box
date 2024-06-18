@@ -4,6 +4,7 @@ import UserModel from '../models/User.model';
 import errorHandler from '../errors/errorHandler';
 import dotenv from 'dotenv';
 import { authenticateReq } from '../middlewares/authenticate.middleware';
+import { connectDB } from '../src/db';
 dotenv.config();
 
 interface loginRequest extends Request {
@@ -32,6 +33,7 @@ export const login = async (req: loginRequest, res: Response, next: NextFunction
                 return next(errorHandler(400, 'Invalid token, clear your cookies'));
             }
         }
+        const dbConnection = await connectDB();
         await UserModel.findOne({ email }).exec();
         res.status(200).send({ success: true, token, successMessage });
         let user = await UserModel.findOne({ email });
