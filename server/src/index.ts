@@ -21,8 +21,9 @@ app.get('/', (req, res) => {
     res.send('Hello, TypeScript with Express!');
 });
 
-app.get('/client', (req, res) => {
-    res.send(process.env.CLIENT_BASE_URL);
+app.get('/client', async (req, res) => {
+    const dbConnection = await connectDB();
+    res.send({ uri: process.env.CLIENT_BASE_URL, dbConnection });
 });
 
 app.get('/db', (req, res) => {
