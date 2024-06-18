@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { setLoading } from "./store/slices/loading.slice";
 import { setUser } from "./store/slices/user.slice";
 import { getUserApi } from "./api/authApi";
-import { setSuccess } from "./store/slices/success.slice";
 import { setError } from "./store/slices/error.slice";
 
 function App() {
@@ -37,8 +36,8 @@ function App() {
 
   if (!userFetched) {
     return (
-      <div className="flex items-center justify-center h-full w-full">
-        <h1 className="text-center text-xl">Authenticating</h1>
+      <div className="flex items-center justify-center h-screen w-screen">
+        <h1 className="text-center text-xl">Authenticating...</h1>
       </div>
     );
   }
