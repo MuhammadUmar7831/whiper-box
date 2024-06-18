@@ -21,15 +21,6 @@ app.get('/', (req, res) => {
     res.send('Hello, TypeScript with Express!');
 });
 
-app.get('/client', async (req, res) => {
-    const dbConnection = await connectDB();
-    res.send({ uri: process.env.CLIENT_BASE_URL, dbConnection });
-});
-
-app.get('/db', (req, res) => {
-    res.send(process.env.MONGODB_URI);
-});
-
 app.use('/api/auth', authRouter);
 app.use('/api/message', messageRouter);
 
