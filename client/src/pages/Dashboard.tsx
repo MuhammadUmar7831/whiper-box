@@ -87,7 +87,7 @@ const Dashboard = () => {
             </div>
             <div className="w-full p-10 flex flex-col gap-4">
                 <h1 className="text-2xl font-semibold">Whispers:</h1>
-                <div className="flex flex-wrap justify-between gap-4">
+                {whispers.length === 0 ? <p>No Whispers yet</p> : <div className="flex flex-wrap justify-between gap-4">
                     {whispers.map((whisper, index) => (
                         <div key={index} className="relative w-[49%] min-w-32">
                             <span className="absolute top-1 left-1 h-full w-full rounded bg-black" />
@@ -104,7 +104,7 @@ const Dashboard = () => {
                             </motion.span>
                         </div>
                     ))}
-                </div>
+                </div>}
             </div>
         </main>
     )
