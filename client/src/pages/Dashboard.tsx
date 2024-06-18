@@ -40,6 +40,9 @@ const Dashboard = () => {
             year: 'numeric',
             month: 'short',
             day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
         });
     }
 
