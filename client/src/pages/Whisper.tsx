@@ -64,7 +64,7 @@ const Whisper = () => {
                             initial={{ top: '0rem', left: '0rem' }}
                             whileTap={{ top: '0.25rem', left: '0.25rem' }}
                             transition={{ duration: 0.1 }}
-                            className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-gray-400 hover:text-gray-900">send</motion.span>
+                            className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-gray-200 hover:text-gray-900">send</motion.span>
                     </button>
                 </div>
             </form>
@@ -86,7 +86,7 @@ const Whisper = () => {
                         initial={{ top: '0rem', left: '0rem' }}
                         whileTap={{ top: '0.25rem', left: '0.25rem' }}
                         transition={{ duration: 0.1 }}
-                        className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-gray-400 hover:text-gray-900">Suggest</motion.span>
+                        className="fold-bold relative inline-block h-full w-full rounded border-2 border-black bg-white px-3 py-1 text-base font-bold text-black transition duration-100 hover:bg-gray-200 hover:text-gray-900">Suggest</motion.span>
                 </button>
 
                 {geminiResponse.map((response, index) => (
