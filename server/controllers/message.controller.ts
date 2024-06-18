@@ -68,6 +68,7 @@ export const sendMessage = async (req: Request, res: Response, next: NextFunctio
 export const getMessageByUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { userId } = req.params;
+        return res.status(200).send({ success: true, userId });
 
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             return next(errorHandler(404, 'user not found'));
@@ -96,7 +97,7 @@ export const deleteUserMessage = async (req: Request, res: Response, next: NextF
         if (!mongoose.Types.ObjectId.isValid(messageId)) {
             return next(errorHandler(400, 'Invalid whisper'));
         }
-    
+
         const delMessage = await MessageModel.findByIdAndDelete(messageId);
         if (!delMessage) {
             return next(errorHandler(400, 'Whisper not found'));
