@@ -16,6 +16,7 @@ export const getUserApi = async (): Promise<ApiResponse> => {
         const response = await axios.get(`${API_BASE_URL}/api/auth/getUser`, { withCredentials: true });
         return response.data;
     } catch (error: any) {
+        console.log(error);
         return { success: false, message: error.response.data.message };
     }
 }
