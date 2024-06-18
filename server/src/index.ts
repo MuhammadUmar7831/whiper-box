@@ -25,6 +25,10 @@ app.get('/client', (req, res) => {
     res.send(process.env.CLIENT_BASE_URL);
 });
 
+app.get('/db', (req, res) => {
+    res.send(process.env.MONGO_URI);
+});
+
 app.use('/api/auth', authRouter);
 app.use('/api/message', messageRouter);
 
