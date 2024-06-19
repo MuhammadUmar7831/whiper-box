@@ -49,7 +49,7 @@ export const sendMessage = async (req: Request, res: Response, next: NextFunctio
             to: user.email,
             subject: "Someone Whispered",
             text: "Someone has whispered about you.",
-            html: "<b>Someone has whispered about you.</b>",
+            html: `<b>Someone has whispered about you.</b><a href="${process.env.CLIENT_BASE_URL}/u">see whisper</a>`,
         };
 
         let emailMessage = '';
