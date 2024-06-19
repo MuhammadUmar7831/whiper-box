@@ -16,11 +16,19 @@ const useWhisper = () => {
     const [prompt, setPrompt] = useState('Generate any one a random feedback or a random question about a person. no headings please');
     const [geminiResponse, setGeminiResponse] = useState(['Have you ever cheated in exams?', "You are the best person i've ever met", "You are so rude."]);
     const dispatch = useAppDispatch();
+    const scalar = 2;
+    var sparkle = confetti.shapeFromText({ text: '✨', scalar });
 
     const runConfetti = () => {
         confetti({
+            spread: 360,
+            ticks: 60,
+            gravity: 0,
+            decay: 0.96,
+            startVelocity: 20,
+            scalar,
             particleCount: 100,
-            spread: 160,
+            shapes: [sparkle],
             origin: { y: 0.6 },
         });
     };
