@@ -6,15 +6,24 @@ import { setError } from "../store/slices/error.slice";
 import { setSuccess } from "../store/slices/success.slice";
 import { model } from "../lib/geminiSDK";
 import { User } from "../types/user.type";
+import confetti from "canvas-confetti";
 
 
 const useWhisper = () => {
     const [message, setMessage] = useState('');
     const [_success, _setSuccess] = useState(true);
     const [user, setUser] = useState<User | null>(null);
-    const [prompt, setPrompt] = useState('Generate a question to inqure someone');
+    const [prompt, setPrompt] = useState('Generate any one a random feedback or a random question about a person. no headings please');
     const [geminiResponse, setGeminiResponse] = useState(['Have you ever cheated in exams?', "You are the best person i've ever met", "You are so rude."]);
     const dispatch = useAppDispatch();
+
+    const runConfetti = () => {
+        confetti({
+            particleCount: 100,
+            spread: 160,
+            origin: { y: 0.6 },
+        });
+    };
 
     const getUser = async (userId: string) => {
         dispatch(setLoading(true));
@@ -62,6 +71,7 @@ const useWhisper = () => {
                 console.log(text);
             }
             setGeminiResponse(responses);
+            runConfetti();
         } catch (error) {
             console.error('Error fetching AI suggestions:', error);
         } finally {
