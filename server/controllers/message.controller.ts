@@ -13,6 +13,7 @@ export const getUser = async (req: Request, res: Response, next: NextFunction) =
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             return next(errorHandler(404, 'Invalid URL'));
         }
+        return res.status(200).send({ success: true, userId });
         const user = await UserModel.findById(userId);
         if (!user) {
             return next(errorHandler(404, 'Invalid URL'));
