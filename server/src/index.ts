@@ -24,6 +24,13 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRouter);
 app.use('/api/message', messageRouter);
 
+app.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    next();
+});
+
+
 const port = process.env.PORT || 80;
 connectDB();
 app.listen(port, async () => {
