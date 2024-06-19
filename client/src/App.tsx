@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { setLoading } from "./store/slices/loading.slice";
 import { setUser } from "./store/slices/user.slice";
 import { getUserApi } from "./api/authApi";
-import { setError } from "./store/slices/error.slice";
+// import { setError } from "./store/slices/error.slice";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -23,8 +23,6 @@ function App() {
         const res = await getUserApi();
         if (res.success) {
           dispatch(setUser(res.user));
-        } else {
-          dispatch(setError(res.message));
         }
       } finally {
         dispatch(setLoading(false));

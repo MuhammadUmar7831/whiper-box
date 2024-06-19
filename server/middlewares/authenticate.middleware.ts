@@ -11,13 +11,13 @@ export const authenticate = async (req: authenticateReq, res: Response, next: Ne
     try {
         const token = await req.cookies.access_token;
         if (token === undefined) {
-            return next(errorHandler(404, 'Please login to continue'));
+            return next(errorHandler(404, 'Please login to continue.'));
         } else {
             try {
                 const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
                 const user = await UserModel.findOne({ email: decoded.email });
                 if (!user) {
-                    return next(errorHandler(404, 'User not found. Please login to continue'));
+                    return next(errorHandler(404, 'Please login to continue.'));
                 }
                 req.user = user;
                 next();
